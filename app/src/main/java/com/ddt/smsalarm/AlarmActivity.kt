@@ -39,13 +39,16 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     private fun setMaxVolume() {
-        val audioManger = getSystemService(AUDIO_SERVICE) as AudioManager
-
-        audioManger.setStreamVolume(
-            AudioManager.STREAM_RING,
-            audioManger.getStreamMaxVolume(AudioManager.STREAM_RING),
-            0
-        )
+        try {
+            val audioManger = getSystemService(AUDIO_SERVICE) as AudioManager
+            audioManger.setStreamVolume(
+                AudioManager.STREAM_RING,
+                audioManger.getStreamMaxVolume(AudioManager.STREAM_RING),
+                0
+            )
+        } catch (e: Exception) {
+            //error
+        }
     }
 
     private fun init() {
