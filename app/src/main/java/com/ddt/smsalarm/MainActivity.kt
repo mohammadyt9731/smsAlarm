@@ -20,7 +20,7 @@ import com.ddt.smsalarm.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private val REQUEST_CODE = 111
     private lateinit var binding: ActivityMainBinding
-    private var sharedPreferences: SharedPreferences? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater, null, false)
@@ -28,9 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         getSmsPermission()
         checkScreenOverlaysPermission()
-        init()
-        initLastPhoneNumber()
-        setOnClick()
     }
 
     private fun getSmsPermission() {
@@ -55,24 +52,6 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    private fun init() {
-        sharedPreferences = getSharedPreferences("myShared", Context.MODE_PRIVATE)
-    }
-
-    private fun initLastPhoneNumber() {
-        binding.apply {
-        val phoneNumber = sharedPreferences?.getString("phoneNumber", "empty")
-        if (phoneNumber != "empty") {
-           tvLastPhoneNumber.text = phoneNumber
-        }
-        else
-        {
-            tvLastPhoneNumberTitle.visibility= View.INVISIBLE
-            tvLastPhoneNumber.visibility= View.INVISIBLE
-        }
-        }
-    }
-
     private fun showGetPermissionDialog() {
 
         AlertDialog.Builder(this)
@@ -90,24 +69,6 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton(getString(R.string.cancel)) { dialog, _ -> dialog.cancel() }
             .create()
             .show()
-    }
-
-    private fun setOnClick() {
-
-        binding.apply {
-            btnVerify.setOnClickListener {
-                if (etPhoneNumber.text.toString().isBlank()) {
-                    etPhoneNumber.error = "یک شماره معتبر وارد کنید"
-                    return@setOnClickListener
-                }
-                val phoneNumber = etPhoneNumber.text.toString()
-                sharedPreferences?.edit()?.putString("phoneNumber", phoneNumber)?.apply()
-                Toast.makeText(this@MainActivity, "ثبت شد", Toast.LENGTH_LONG).show()
-
-                etPhoneNumber.setText("")
-                initLastPhoneNumber()
-            }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

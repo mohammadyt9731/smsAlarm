@@ -1,14 +1,10 @@
 <resources>
     <string name="app_name">SmsAlarm</string>
-    <string name="phoneNumber">شماره موبایل</string>
-    <string name="verify">تایید</string>
-    <string name="description">شماره موبایلی که قصد دارید هنگام دریافت پیامک از آن شماره به شما الارم دهیم وارد کنید</string>
+    <string name="description">این برنامه به محض دریافت پیامکی که در متن آن ((ایران ویزامتریک)) یا ((وقت مصاحبه)) آمده باشد به شما آلارم میدهد</string>
     <string name="close">بستن</string>
     <string name="sampleSms">متن پیامک</string>
     <string name="get_permission">دریافت مجوز Screen Overlays</string>
     <string name="getOverlaysPermission">جهت نمایش صفحه یادآور دارو نیاز به مجوز نمایش روی سایر برنامه ها میباشد</string>
     <string name="givePermission">دادن مجوز</string>
     <string name="cancel">لغو</string>
-    <string name="lastPhoneNumber">آخرین شماره : </string>
-    <string name="samplePhoneNumber">+985555555</string>
 </resources>
