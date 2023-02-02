@@ -3,8 +3,8 @@ package com.ddt.smsalarm.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ddt.smsalarm.data.MainRepository
-import com.ddt.smsalarm.data.model.Setting
 import com.ddt.smsalarm.data.db.FilterEntity
+import com.ddt.smsalarm.data.model.Setting
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,8 +22,16 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     val setting = _setting.asStateFlow()
 
     init {
+        insertDefaultFeature()
         getSetting()
         getFilters()
+
+    }
+
+    private fun insertDefaultFeature() =viewModelScope.launch(Dispatchers.IO) {
+        repository.insertFilter(FilterEntity(id = 1, text = "وقت مصاحبه"))
+        repository.insertFilter(FilterEntity(id = 2, text = "ایران ویزامتریک"))
+
     }
 
     private fun getFilters() = viewModelScope.launch(Dispatchers.IO) {

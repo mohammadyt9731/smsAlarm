@@ -11,4 +11,5 @@
     <color name="dark_blue">#204555</color>
     <color name="red">#910A00</color>
     <color name="semi_white">#f7f7f7</color>
+    <color name="dark_blue_ripple">#33204555</color>
 </resources>

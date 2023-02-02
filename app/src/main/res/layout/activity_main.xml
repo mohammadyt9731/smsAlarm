@@ -8,6 +8,7 @@
     tools:context=".ui.MainActivity">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cl_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8sdp"
@@ -37,7 +38,8 @@
                 android:id="@+id/tv_alarm_duration_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_16sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_18sdp"
                 android:text="@string/alarm_duration"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
@@ -48,6 +50,7 @@
                 android:id="@+id/btn_increment"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
                 android:insetRight="0dp"
@@ -60,7 +63,6 @@
                 app:iconPadding="0dp"
                 app:iconSize="@dimen/_14sdp"
                 app:iconTint="@color/white"
-                android:layout_marginLeft="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="@id/btn_decrement"
                 app:layout_constraintLeft_toRightOf="@id/tv_alarm_duration"
                 app:layout_constraintTop_toTopOf="@id/btn_decrement" />
@@ -119,15 +121,23 @@
 
 
     <TextView
+        android:id="@+id/filter_list_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
         android:gravity="center"
         android:paddingHorizontal="32dp"
         android:text="@string/description"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="25dp" />
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintTop_toBottomOf="@id/cl_setting" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_filters"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filter_list_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

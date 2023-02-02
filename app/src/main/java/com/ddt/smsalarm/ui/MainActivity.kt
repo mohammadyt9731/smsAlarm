@@ -14,10 +14,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ddt.smsalarm.R
+import com.ddt.smsalarm.data.db.FilterEntity
 import com.ddt.smsalarm.data.model.Setting
 import com.ddt.smsalarm.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -28,6 +31,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var setting: Setting
 
+    @Inject
+    lateinit var filterAdapter: FilterAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater, null, false)
@@ -37,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         checkScreenOverlaysPermission()
         initCollection()
         setOnClick()
+        setUpRecyclerView()
     }
 
     private fun getSmsPermission() {
@@ -102,6 +109,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.filters.collect {
+                filterAdapter.setNewList(it)
+            }
+        }
     }
 
     private fun setOnClick() {
@@ -122,14 +135,29 @@ class MainActivity : AppCompatActivity() {
             }
 
             switchVibrator.setOnClickListener {
-                setting=setting.copy(isVibratorEnable = setting.isVibratorEnable.not())
+                setting = setting.copy(isVibratorEnable = setting.isVibratorEnable.not())
                 viewModel.saveSetting(setting)
             }
 
             switchMaxVolume.setOnClickListener {
-                setting=setting.copy(isMaxVolumeEnable = setting.isMaxVolumeEnable.not())
+                setting = setting.copy(isMaxVolumeEnable = setting.isMaxVolumeEnable.not())
                 viewModel.saveSetting(setting)
             }
+        }
+    }
+
+    private fun setUpRecyclerView() {
+        //setOnClik
+        filterAdapter.setOnClickListeners(
+            deleteClickListener = {
+                viewModel.deleteFilter(it)
+            }, editClickListener = {
+
+            })
+
+        binding.rvFilters.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = filterAdapter
         }
     }
 }
