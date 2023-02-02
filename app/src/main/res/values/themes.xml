@@ -13,4 +13,21 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="switch_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layoutDirection">rtl</item>
+        <item name="android:textSize">@dimen/_14ssp</item>
+        <item name="android:checked">true</item>
+        <item name="android:theme">@style/slider_theme</item>
+        <item name="android:gravity">right|center</item>
+        <item name="android:layout_margin">@dimen/_16sdp</item>
+    </style>
+
+    <style name="slider_theme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorControlActivated">@color/dark_blue</item>
+        <item name="colorPrimary">@color/dark_blue</item>
+    </style>
+
 </resources>

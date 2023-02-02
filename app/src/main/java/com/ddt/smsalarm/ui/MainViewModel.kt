@@ -3,14 +3,16 @@ package com.ddt.smsalarm.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ddt.smsalarm.data.MainRepository
-import com.ddt.smsalarm.data.Setting
+import com.ddt.smsalarm.data.model.Setting
 import com.ddt.smsalarm.data.db.FilterEntity
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
 
     private val _filters = MutableStateFlow<List<FilterEntity>>(emptyList())

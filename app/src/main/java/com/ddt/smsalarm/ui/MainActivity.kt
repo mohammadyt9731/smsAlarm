@@ -8,16 +8,23 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.ddt.smsalarm.R
 import com.ddt.smsalarm.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val REQUEST_CODE = 111
     private lateinit var binding: ActivityMainBinding
+
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +33,12 @@ class MainActivity : AppCompatActivity() {
 
         getSmsPermission()
         checkScreenOverlaysPermission()
+
+        lifecycleScope.launchWhenCreated {
+            viewModel.setting.collect {
+                Log.i("Mohammad", "onCreate: $it")
+            }
+        }
     }
 
     private fun getSmsPermission() {

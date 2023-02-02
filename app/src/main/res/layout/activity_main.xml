@@ -4,7 +4,119 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.MainActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+        android:backgroundTint="@color/semi_white"
+        app:cardCornerRadius="@dimen/_12sdp"
+        app:cardElevation="@dimen/_8sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="@dimen/_12sdp">
+
+            <TextView
+                android:id="@+id/tv_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20ssp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_alarm_duration_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_16sdp"
+                android:text="@string/alarm_duration"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_setting" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_increment"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                app:backgroundTint="@color/dark_blue"
+                app:cornerRadius="@dimen/_100sdp"
+                app:icon="@drawable/ic_plus"
+                app:iconGravity="textTop"
+                app:iconPadding="0dp"
+                app:iconSize="@dimen/_14sdp"
+                app:iconTint="@color/white"
+                android:layout_marginLeft="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@id/btn_decrement"
+                app:layout_constraintLeft_toRightOf="@id/tv_alarm_duration"
+                app:layout_constraintTop_toTopOf="@id/btn_decrement" />
+
+            <TextView
+                android:id="@+id/tv_alarm_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:text="@string/five"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/btn_decrement"
+                app:layout_constraintLeft_toRightOf="@id/btn_decrement"
+                app:layout_constraintTop_toTopOf="@id/btn_decrement" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_decrement"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                app:backgroundTint="@color/red"
+                app:cornerRadius="@dimen/_100sdp"
+                app:icon="@drawable/ic_minus"
+                app:iconGravity="textTop"
+                app:iconPadding="0dp"
+                app:iconSize="@dimen/_14sdp"
+                app:iconTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/tv_alarm_duration_title"
+                app:layout_constraintLeft_toLeftOf="@id/switch_max_volume"
+                app:layout_constraintTop_toTopOf="@id/tv_alarm_duration_title" />
+
+            <Switch
+                android:id="@+id/switch_max_volume"
+                style="@style/switch_style"
+                android:text="@string/max_volume"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_alarm_duration_title"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <Switch
+                android:id="@+id/switch_vibrator"
+                style="@style/switch_style"
+                android:text="@string/vibrate_when_alarm"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/switch_max_volume"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -14,8 +126,8 @@
         android:text="@string/description"
         android:textColor="@color/black"
         android:textSize="16sp"
-        />
-
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="25dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

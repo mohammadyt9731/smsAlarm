@@ -2,6 +2,7 @@ package com.ddt.smsalarm.data
 
 import com.ddt.smsalarm.data.db.FilterDao
 import com.ddt.smsalarm.data.db.FilterEntity
+import com.ddt.smsalarm.data.model.Setting
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

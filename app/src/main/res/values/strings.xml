@@ -7,4 +7,9 @@
     <string name="getOverlaysPermission">جهت نمایش صفحه یادآور دارو نیاز به مجوز نمایش روی سایر برنامه ها میباشد</string>
     <string name="givePermission">دادن مجوز</string>
     <string name="cancel">لغو</string>
+    <string name="setting">تنظیمات</string>
+    <string name="alarm_duration">مدت زمان نمایش صفحه آلارم</string>
+    <string name="max_volume">تنظیم صدای هشدار روی حداکثر</string>
+    <string name="vibrate_when_alarm">ویبره هنگام هشدار</string>
+    <string name="five">5</string>
 </resources>
