@@ -12,8 +12,6 @@ import javax.inject.Inject
 
 class SettingDataStore @Inject constructor(private val dataStore: DataStore<Preferences>) {
 
-    private val vibratorPreferencesKey = booleanPreferencesKey("vibrator")
-    private val maxVolumePreferencesKey = booleanPreferencesKey("maxVolume")
     private val settingPreferencesKey = stringPreferencesKey("setting")
 
     fun getSetting() = dataStore.data.map {
@@ -21,15 +19,5 @@ class SettingDataStore @Inject constructor(private val dataStore: DataStore<Pref
     }
 
     suspend fun storeSetting(setting: Setting) =
-        dataStore.edit { it[settingPreferencesKey] = Gson().toJson(setting) }
-
-    fun isVibratorEnable() = dataStore.data.map { it[vibratorPreferencesKey] ?: true }
-
-    suspend fun storeIsVibratorEnable(isVibratorEnable: Boolean) =
-        dataStore.edit { it[vibratorPreferencesKey] = isVibratorEnable }
-
-    fun isMaxVolumeEnable() = dataStore.data.map { it[maxVolumePreferencesKey] ?: true }
-
-    suspend fun storeIsMaxVolumeEnable(maxVolumeEnable: Boolean) =
-        dataStore.edit { it[maxVolumePreferencesKey] = maxVolumeEnable }
+        dataStore.edit { it[settingPreferencesKey] = Gson().toJson(setting,Setting::class.java) }
 }

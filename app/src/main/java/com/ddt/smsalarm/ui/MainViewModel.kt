@@ -21,6 +21,11 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     private val _setting = MutableStateFlow<Setting>(Setting())
     val setting = _setting.asStateFlow()
 
+    init {
+        getSetting()
+        getFilters()
+    }
+
     private fun getFilters() = viewModelScope.launch(Dispatchers.IO) {
         repository.getFilters().collect {
             _filters.emit(it)

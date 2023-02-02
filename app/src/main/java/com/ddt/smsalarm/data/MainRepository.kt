@@ -15,26 +15,11 @@ class MainRepository @Inject constructor(
     suspend fun storeISetting(setting: Setting) =
         dataStore.storeSetting(setting)
 
-
-    fun isVibratorEnable() = dataStore.isVibratorEnable()
-
-    suspend fun storeIsVibratorEnable(isVibratorEnable: Boolean) =
-        dataStore.storeIsVibratorEnable(isVibratorEnable)
-
-    fun isMaxVolumeEnable() = dataStore.isMaxVolumeEnable()
-
-    suspend fun storeIsMaxVolumeEnable(maxVolumeEnable: Boolean) =
-        dataStore.storeIsMaxVolumeEnable(maxVolumeEnable)
-
-
     suspend fun insertFilter(filterEntity: FilterEntity) = dao.insertFilter(filterEntity)
-
 
     suspend fun updateFilter(filterEntity: FilterEntity) = dao.updateFilter(filterEntity)
 
-
     suspend fun deleteFilter(filterEntity: FilterEntity) = dao.deleteFilter(filterEntity)
-
 
     fun getFilters() = dao.getFilters()
 }

@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.ddt.smsalarm.R
+import com.ddt.smsalarm.data.model.Setting
 import com.ddt.smsalarm.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
+    private lateinit var setting: Setting
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater, null, false)
@@ -33,12 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         getSmsPermission()
         checkScreenOverlaysPermission()
-
-        lifecycleScope.launchWhenCreated {
-            viewModel.setting.collect {
-                Log.i("Mohammad", "onCreate: $it")
-            }
-        }
+        initCollection()
+        setOnClick()
     }
 
     private fun getSmsPermission() {
@@ -89,6 +87,48 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "مجوز داده شد", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "مجوز داده نشد", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun initCollection() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.setting.collect {
+                setting = it
+                binding.apply {
+                    tvAlarmDuration.text = it.alarmDurationPerMinute.toString()
+                    switchMaxVolume.isChecked = it.isMaxVolumeEnable
+                    switchVibrator.isChecked = it.isVibratorEnable
+                }
+            }
+        }
+    }
+
+    private fun setOnClick() {
+        binding.apply {
+
+            btnIncrement.setOnClickListener {
+                setting =
+                    setting.copy(alarmDurationPerMinute = setting.alarmDurationPerMinute.plus(1))
+                viewModel.saveSetting(setting)
+            }
+
+            btnDecrement.setOnClickListener {
+                if (setting.alarmDurationPerMinute > 1) {
+                    setting =
+                        setting.copy(alarmDurationPerMinute = setting.alarmDurationPerMinute.minus(1))
+                    viewModel.saveSetting(setting)
+                }
+            }
+
+            switchVibrator.setOnClickListener {
+                setting=setting.copy(isVibratorEnable = setting.isVibratorEnable.not())
+                viewModel.saveSetting(setting)
+            }
+
+            switchMaxVolume.setOnClickListener {
+                setting=setting.copy(isMaxVolumeEnable = setting.isMaxVolumeEnable.not())
+                viewModel.saveSetting(setting)
             }
         }
     }
