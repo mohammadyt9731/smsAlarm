@@ -1,9 +1,10 @@
-package com.ddt.smsalarm
+package com.ddt.smsalarm.util
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.telephony.gsm.SmsMessage
+import com.ddt.smsalarm.ui.AlarmActivity
 
 
 class SmsReceiver : BroadcastReceiver() {

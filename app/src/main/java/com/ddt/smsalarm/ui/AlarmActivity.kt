@@ -1,4 +1,4 @@
-package com.ddt.smsalarm
+package com.ddt.smsalarm.ui
 
 import android.content.Context
 import android.media.AudioManager

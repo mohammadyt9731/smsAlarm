@@ -19,12 +19,12 @@
         android:theme="@style/Theme.SmsAlarm"
         tools:targetApi="31">
         <activity
-            android:name=".AlarmActivity"
+            android:name=".ui.AlarmActivity"
             android:exported="false"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
 
@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".SmsReceiver"
+            android:name=".util.SmsReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
