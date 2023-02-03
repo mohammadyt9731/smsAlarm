@@ -42,7 +42,7 @@
                 android:layout_marginTop="@dimen/_18sdp"
                 android:text="@string/alarm_duration"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14ssp"
+                android:textSize="@dimen/_13ssp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_setting" />
 
@@ -50,7 +50,7 @@
                 android:id="@+id/btn_increment"
                 android:layout_width="@dimen/_24sdp"
                 android:layout_height="@dimen/_24sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
                 android:insetLeft="0dp"
                 android:insetTop="0dp"
                 android:insetRight="0dp"
@@ -71,7 +71,7 @@
                 android:id="@+id/tv_alarm_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
+                android:layout_margin="@dimen/_8sdp"
                 android:text="@string/five"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_18ssp"
@@ -129,7 +129,7 @@
         android:paddingHorizontal="32dp"
         android:text="@string/description"
         android:textColor="@color/black"
-        android:textSize="@dimen/_16ssp"
+        android:textSize="@dimen/_14ssp"
         app:layout_constraintTop_toBottomOf="@id/cl_setting" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -137,7 +137,42 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_8sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_add_filter"
         app:layout_constraintTop_toBottomOf="@id/filter_list_title" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:paddingVertical="@dimen/_8sdp"
+        android:text="@string/add_filter"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp"
+        app:backgroundTint="@color/dark_blue"
+        app:cornerRadius="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_get_filter_online"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_filters" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_get_filter_online"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_8sdp"
+        android:text="@string/get_filter_online"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp"
+        app:backgroundTint="@color/dark_blue"
+        app:cornerRadius="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_add_filter"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_add_filter"
+        app:layout_constraintTop_toTopOf="@id/btn_add_filter" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

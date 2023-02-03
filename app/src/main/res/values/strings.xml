@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SmsAlarm</string>
-    <string name="description">لیست کلمات کلیدی که اگر در متن پیامک دریافتی باشید این برنامه آلارم میدهد.</string>
+    <string name="description">لیست کلمات کلیدی (فیلتر) که اگر در متن پیامک دریافتی باشد،این برنامه به شما آلارم میدهد.</string>
     <string name="close">بستن</string>
     <string name="sampleSms">متن پیامک</string>
     <string name="get_permission">دریافت مجوز Screen Overlays</string>
@@ -15,4 +15,6 @@
     <string name="sample_filter">وقت مصاحبه</string>
     <string name="edit">ویرایش</string>
     <string name="delete">حذف</string>
+    <string name="add_filter">افزودن دستی فیلتر</string>
+    <string name="get_filter_online">دریافت آنلاین فیلتر ها</string>
 </resources>
