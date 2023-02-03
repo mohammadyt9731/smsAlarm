@@ -10,7 +10,9 @@ class MainRepository @Inject constructor(
     private val dataStore: SettingDataStore,
     private val dao: FilterDao
 ) {
-    fun getSetting(): Flow<Setting> = dataStore.getSetting()
+    fun getSettingFlow(): Flow<Setting> = dataStore.getSettingFlow()
+
+    suspend fun getSetting() = dataStore.getSetting()
 
     suspend fun storeISetting(setting: Setting) =
         dataStore.storeSetting(setting)

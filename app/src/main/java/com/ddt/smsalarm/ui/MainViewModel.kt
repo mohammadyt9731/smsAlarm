@@ -23,12 +23,12 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
 
     init {
         insertDefaultFeature()
-        getSetting()
+        getSettingFlow()
         getFilters()
 
     }
 
-    private fun insertDefaultFeature() =viewModelScope.launch(Dispatchers.IO) {
+    private fun insertDefaultFeature() = viewModelScope.launch(Dispatchers.IO) {
         repository.insertFilter(FilterEntity(id = 1, text = "وقت مصاحبه"))
         repository.insertFilter(FilterEntity(id = 2, text = "ایران ویزامتریک"))
 
@@ -53,15 +53,17 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     }
 
 
-    private fun getSetting() = viewModelScope.launch(Dispatchers.IO) {
-        repository.getSetting().collect {
+    private fun getSettingFlow() = viewModelScope.launch(Dispatchers.IO) {
+        repository.getSettingFlow().collect {
             _setting.emit(it)
         }
     }
+
+    suspend fun getSetting() = repository.getSetting()
 
     fun saveSetting(setting: Setting) = viewModelScope.launch(Dispatchers.IO) {
         repository.storeISetting(setting)
     }
 
-    suspend fun getFilter(id:Int) = repository.getFilter(id)
+    suspend fun getFilter(id: Int) = repository.getFilter(id)
 }

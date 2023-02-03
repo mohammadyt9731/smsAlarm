@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmsAlarm</string>
+    <string name="app_name">هشدار پیامک</string>
     <string name="description">لیست کلمات کلیدی (فیلتر) که اگر در متن پیامک دریافتی باشد،این برنامه به شما آلارم میدهد.</string>
     <string name="close">بستن</string>
     <string name="sampleSms">متن پیامک</string>
@@ -27,4 +27,5 @@
     <string name="doYouWantToDeleteThisFilter">آیا میخواهید این فیلتر را حذف کنید؟</string>
     <string name="yes">بله</string>
     <string name="no">خیر</string>
+    <string name="ok_i_found">باشه فهمیدم</string>
 </resources>

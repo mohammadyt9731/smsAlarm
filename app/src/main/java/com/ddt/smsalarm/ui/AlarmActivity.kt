@@ -9,15 +9,26 @@ import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.ddt.smsalarm.data.model.Setting
 import com.ddt.smsalarm.databinding.ActivityAlarmBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
-
+@AndroidEntryPoint
 class AlarmActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAlarmBinding
     private var ringtone: Ringtone? = null
     private var vibrator: Vibrator? = null
+
+    private val viewModel: MainViewModel by viewModels()
+    private lateinit var setting: Setting
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +37,10 @@ class AlarmActivity : AppCompatActivity() {
 
 
         addRequiredFlags()
-        setMaxVolume()
         init()
+        setUpSetting()
         setOnClickListener()
-        vibrate()
+        setTimerForClose()
     }
 
     private fun addRequiredFlags() {
@@ -38,7 +49,30 @@ class AlarmActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
     }
 
+    private fun init() {
+        runBlocking {
+            setting = viewModel.getSetting()
+        }
+        val message = intent.extras?.getString("message") ?: ""
+        if (message.isNotBlank())
+            binding.tvSmaMessage.text = message
+
+        val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
+        ringtone = RingtoneManager.getRingtone(this, notification)
+
+    }
+
+    private fun setUpSetting() {
+        if (setting.isMaxVolumeEnable) {
+            setMaxVolume()
+        }
+        if (setting.isVibratorEnable) {
+            vibrate()
+        }
+    }
+
     private fun setMaxVolume() {
+
         try {
             val audioManger = getSystemService(AUDIO_SERVICE) as AudioManager
             audioManger.setStreamVolume(
@@ -48,24 +82,12 @@ class AlarmActivity : AppCompatActivity() {
             )
         } catch (e: Exception) {
             //error
+            Log.i("Mohammad", "setMaxVolume: ")
         }
-    }
-
-    private fun init() {
-        val message = intent.extras?.getString("message") ?: ""
-        if (message.isNotBlank())
-            binding.tvSmaMessage.text = message
-
-        val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
-        ringtone = RingtoneManager.getRingtone(
-            this,
-            notification
-        )
     }
 
     private fun setOnClickListener() {
         binding.btnClose.setOnClickListener {
-            vibrator?.cancel()
             finish()
         }
     }
@@ -76,23 +98,31 @@ class AlarmActivity : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 it.vibrate(
                     VibrationEffect.createOneShot(
-                        30000,
+                        setting.alarmDurationPerMinute.toLong(),
                         VibrationEffect.DEFAULT_AMPLITUDE
                     )
                 )
             } else {
-                it.vibrate(30000)
+                it.vibrate(setting.alarmDurationPerMinute.toLong())
             }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun setTimerForClose() {
+        lifecycleScope.launchWhenCreated {
+            delay(setting.alarmDurationPerMinute * 60 * 1000L)
+            finish()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
         ringtone?.play()
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
         ringtone?.stop()
+        vibrator?.cancel()
+        super.onDestroy()
     }
 }

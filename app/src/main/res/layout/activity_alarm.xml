@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.AlarmActivity">
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_sms_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:text="@string/app_name"
+        android:textColor="@color/dark_blue"
+        android:textSize="@dimen/_22ssp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvSmaMessage"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingHorizontal="16dp"
+        android:padding="16dp"
         android:text="@string/sampleSms"
         android:textColor="@color/black"
+        android:textSize="@dimen/_24ssp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/btnClose"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:textSize="32sp" />
-
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sms_alarm" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnClose"
@@ -27,10 +41,10 @@
         android:layout_marginBottom="16dp"
         android:paddingHorizontal="32dp"
         android:paddingVertical="8dp"
-        android:text="@string/close"
+        android:text="@string/ok_i_found"
         android:textColor="@color/white"
-        android:textSize="28sp"
-        app:backgroundTint="@color/purple_700"
+        android:textSize="@dimen/_22ssp"
+        app:backgroundTint="@color/dark_blue"
         app:cornerRadius="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
