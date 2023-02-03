@@ -119,6 +119,9 @@ class AlarmActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            ringtone?.isLooping = true
+        }
         ringtone?.play()
     }
 
