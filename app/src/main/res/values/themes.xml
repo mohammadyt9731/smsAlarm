@@ -75,4 +75,8 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="AlertDialogCustom" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
 </resources>

@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ddt.smsalarm.R
+import com.ddt.smsalarm.data.db.FilterEntity
 import com.ddt.smsalarm.data.model.Setting
 import com.ddt.smsalarm.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -151,6 +152,14 @@ class MainActivity : AppCompatActivity() {
             btnAddFilter.setOnClickListener {
                 AddFilterBottomSheet().show(supportFragmentManager, AddFilterBottomSheet().tag)
             }
+
+            btnGetFilterOnline.setOnClickListener {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.this_feature_add_soon),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
@@ -158,7 +167,7 @@ class MainActivity : AppCompatActivity() {
         //setOnClik
         filterAdapter.setOnClickListeners(
             deleteClickListener = {
-                viewModel.deleteFilter(it)
+                showDeleteDialog(it)
             }, editClickListener = {
                 AddFilterBottomSheet(filterId = it).show(
                     supportFragmentManager,
@@ -170,5 +179,19 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = filterAdapter
         }
+    }
+
+    private fun showDeleteDialog(filterEntity: FilterEntity) {
+
+        AlertDialog.Builder(this, R.style.AlertDialogCustom)
+            .setTitle(this.getString(R.string.delete_filter))
+            .setMessage(this.getString(R.string.doYouWantToDeleteThisFilter))
+            .setCancelable(true)
+            .setPositiveButton(this.getString(R.string.yes)) { _, _ ->
+                viewModel.deleteFilter(filterEntity)
+            }
+            .setNegativeButton(this.getString(R.string.no)) { dialog, _ -> dialog.cancel() }
+            .create()
+            .show()
     }
 }

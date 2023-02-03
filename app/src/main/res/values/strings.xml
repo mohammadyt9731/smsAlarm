@@ -22,4 +22,9 @@
     <string name="edit_filter">ویرایش</string>
     <string name="submit">تایید</string>
     <string name="enter_filter">کلمه یا جمله کلیدی را وارد کنید.</string>
+    <string name="this_feature_add_soon">این ویژگی به زودی اضافه خواهد شد</string>
+    <string name="delete_filter">حذف فیلتر</string>
+    <string name="doYouWantToDeleteThisFilter">آیا میخواهید این فیلتر را حذف کنید؟</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
 </resources>
