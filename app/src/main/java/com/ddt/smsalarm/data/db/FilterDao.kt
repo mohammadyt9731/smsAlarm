@@ -18,4 +18,7 @@ interface FilterDao {
     @Query("SELECT * FROM filter")
     fun getFilters(): Flow<List<FilterEntity>>
 
+    @Query("SELECT * FROM filter WHERE id=:id")
+    suspend fun getFilter(id: Int): FilterEntity?
+
 }

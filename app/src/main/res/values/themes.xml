@@ -33,4 +33,46 @@
         <item name="colorPrimary">@color/dark_blue</item>
     </style>
 
+    <!--bottomSheetAddMention-->
+    <style name="text_input_layout_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="expandedHintEnabled">false</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="hintTextColor">@color/gray</item>
+        <item name="errorTextAppearance">@color/gray</item>
+        <item name="hintTextAppearance">@style/label_text_style</item>
+        <item name="boxStrokeColor">@color/bg_gray_dark_blue</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxBackgroundMode">outline</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_5sdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_5sdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_5sdp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_5sdp</item>
+        <item name="android:layout_marginTop">@dimen/_10sdp</item>
+        <item name="android:layoutDirection">rtl</item>
+    </style>
+
+    <style name="label_text_style" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">@dimen/_12ssp</item>
+    </style>
+
+    <style name="tv_hint_style" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:layout_height">@dimen/_38ssp</item>
+        <item name="android:padding">@dimen/_4ssp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textDirection">rtl</item>
+        <item name="android:textCursorDrawable">@drawable/bg_cursor</item>
+    </style>
+
+    <style name="custom_bottom_sheet_dialog_theme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/custom_bottom_sheet_style</item>
+    </style>
+
+    <style name="custom_bottom_sheet_style" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

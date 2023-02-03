@@ -62,4 +62,6 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     fun saveSetting(setting: Setting) = viewModelScope.launch(Dispatchers.IO) {
         repository.storeISetting(setting)
     }
+
+    suspend fun getFilter(id:Int) = repository.getFilter(id)
 }

@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ddt.smsalarm.R
-import com.ddt.smsalarm.data.db.FilterEntity
 import com.ddt.smsalarm.data.model.Setting
 import com.ddt.smsalarm.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var filterAdapter: FilterAdapter
+    private var lastSizeOfList = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,6 +113,10 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launchWhenCreated {
             viewModel.filters.collect {
                 filterAdapter.setNewList(it)
+                if (lastSizeOfList < it.size) {
+                    binding.rvFilters.smoothScrollToPosition(it.size)
+                }
+                lastSizeOfList = it.size
             }
         }
     }
@@ -143,6 +147,10 @@ class MainActivity : AppCompatActivity() {
                 setting = setting.copy(isMaxVolumeEnable = setting.isMaxVolumeEnable.not())
                 viewModel.saveSetting(setting)
             }
+
+            btnAddFilter.setOnClickListener {
+                AddFilterBottomSheet().show(supportFragmentManager, AddFilterBottomSheet().tag)
+            }
         }
     }
 
@@ -152,7 +160,10 @@ class MainActivity : AppCompatActivity() {
             deleteClickListener = {
                 viewModel.deleteFilter(it)
             }, editClickListener = {
-
+                AddFilterBottomSheet(filterId = it).show(
+                    supportFragmentManager,
+                    AddFilterBottomSheet().tag
+                )
             })
 
         binding.rvFilters.apply {

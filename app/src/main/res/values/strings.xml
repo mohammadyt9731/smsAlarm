@@ -15,6 +15,11 @@
     <string name="sample_filter">وقت مصاحبه</string>
     <string name="edit">ویرایش</string>
     <string name="delete">حذف</string>
-    <string name="add_filter">افزودن دستی فیلتر</string>
+    <string name="add_filter">افزودن فیلتر</string>
     <string name="get_filter_online">دریافت آنلاین فیلتر ها</string>
+    <string name="add">افزودن</string>
+    <string name="key_word">کلمه یا جمله کلیدی(فیلتر)</string>
+    <string name="edit_filter">ویرایش</string>
+    <string name="submit">تایید</string>
+    <string name="enter_filter">کلمه یا جمله کلیدی را وارد کنید.</string>
 </resources>

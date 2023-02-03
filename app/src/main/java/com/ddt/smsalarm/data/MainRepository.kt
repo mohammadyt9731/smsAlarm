@@ -22,6 +22,8 @@ class MainRepository @Inject constructor(
     suspend fun deleteFilter(filterEntity: FilterEntity) = dao.deleteFilter(filterEntity)
 
     fun getFilters() = dao.getFilters()
+
+    suspend fun getFilter(id:Int) = dao.getFilter(id)
 }
 
 
