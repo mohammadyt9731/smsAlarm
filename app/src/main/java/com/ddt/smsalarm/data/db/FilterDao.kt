@@ -21,4 +21,7 @@ interface FilterDao {
     @Query("SELECT * FROM filter WHERE id=:id")
     suspend fun getFilter(id: Int): FilterEntity?
 
+    @Query("SELECT text FROM filter")
+    fun getFiltersMessage(): List<String>
+
 }

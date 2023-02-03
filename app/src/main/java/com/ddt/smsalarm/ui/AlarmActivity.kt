@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.ddt.smsalarm.data.model.Setting
 import com.ddt.smsalarm.databinding.ActivityAlarmBinding
+import com.ddt.smsalarm.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -53,7 +54,7 @@ class AlarmActivity : AppCompatActivity() {
         runBlocking {
             setting = viewModel.getSetting()
         }
-        val message = intent.extras?.getString("message") ?: ""
+        val message = intent.extras?.getString(Constants.MESSAGE_KEY) ?: ""
         if (message.isNotBlank())
             binding.tvSmaMessage.text = message
 
@@ -94,16 +95,17 @@ class AlarmActivity : AppCompatActivity() {
 
     private fun vibrate() {
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        val vibrateTime = setting.alarmDurationPerMinute * 60 * 1000L
         vibrator?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 it.vibrate(
                     VibrationEffect.createOneShot(
-                        setting.alarmDurationPerMinute.toLong(),
+                        vibrateTime,
                         VibrationEffect.DEFAULT_AMPLITUDE
                     )
                 )
             } else {
-                it.vibrate(setting.alarmDurationPerMinute.toLong())
+                it.vibrate(vibrateTime)
             }
         }
     }
