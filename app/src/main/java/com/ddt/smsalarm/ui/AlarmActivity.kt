@@ -2,9 +2,7 @@ package com.ddt.smsalarm.ui
 
 import android.content.Context
 import android.media.AudioManager
-import android.media.Ringtone
-import android.media.RingtoneManager
-import android.net.Uri
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -14,6 +12,7 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.ddt.smsalarm.R
 import com.ddt.smsalarm.data.model.Setting
 import com.ddt.smsalarm.databinding.ActivityAlarmBinding
 import com.ddt.smsalarm.util.Constants
@@ -24,7 +23,8 @@ import kotlinx.coroutines.runBlocking
 @AndroidEntryPoint
 class AlarmActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAlarmBinding
-    private var ringtone: Ringtone? = null
+
+    private lateinit var ringtone: MediaPlayer
     private var vibrator: Vibrator? = null
 
     private val viewModel: MainViewModel by viewModels()
@@ -58,8 +58,7 @@ class AlarmActivity : AppCompatActivity() {
         if (message.isNotBlank())
             binding.tvSmaMessage.text = message
 
-        val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
-        ringtone = RingtoneManager.getRingtone(this, notification)
+        ringtone = MediaPlayer.create(this, R.raw.alarm)
 
     }
 
@@ -77,8 +76,8 @@ class AlarmActivity : AppCompatActivity() {
         try {
             val audioManger = getSystemService(AUDIO_SERVICE) as AudioManager
             audioManger.setStreamVolume(
-                AudioManager.STREAM_RING,
-                audioManger.getStreamMaxVolume(AudioManager.STREAM_RING),
+                AudioManager.STREAM_MUSIC,
+                audioManger.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
                 0
             )
         } catch (e: Exception) {
@@ -119,14 +118,12 @@ class AlarmActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            ringtone?.isLooping = true
-        }
-        ringtone?.play()
+        ringtone.isLooping = true
+        ringtone.start()
     }
 
     override fun onDestroy() {
-        ringtone?.stop()
+        ringtone.stop()
         vibrator?.cancel()
         super.onDestroy()
     }
