@@ -5,9 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.telephony.gsm.SmsMessage
 import androidx.annotation.CallSuper
+import com.ddt.smsalarm.data.SettingDataStore
 import com.ddt.smsalarm.data.db.FilterDao
 import com.ddt.smsalarm.ui.AlarmActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 abstract class HiltBroadcastReceiver : BroadcastReceiver() {
@@ -22,6 +24,9 @@ class SmsReceiver : HiltBroadcastReceiver() {
     @Inject
     lateinit var dao: FilterDao
 
+    @Inject
+    lateinit var dataStore: SettingDataStore
+
     override fun onReceive(context: Context, intent: Intent?) {
         super.onReceive(context, intent)
         if (intent?.action.equals("android.provider.Telephony.SMS_RECEIVED")) {
@@ -34,8 +39,12 @@ class SmsReceiver : HiltBroadcastReceiver() {
                     for (i in mPdus.indices) {
                         msg[i] = SmsMessage.createFromPdu(mPdus[i] as ByteArray)
                         val messageBody = msg[i]?.messageBody ?: ""
-                        if (checkValidMessage(messageBody))
-                            startAlarmActivity(context, messageBody)
+                        runBlocking {
+                            if (dataStore.getSetting().isAlarmEnable) {
+                                if (checkValidMessage(messageBody))
+                                    startAlarmActivity(context, messageBody)
+                            }
+                        }
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

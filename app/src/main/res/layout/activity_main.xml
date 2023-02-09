@@ -116,6 +116,14 @@
                 app:layout_constraintTop_toBottomOf="@id/switch_max_volume"
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+            <Switch
+                android:id="@+id/switch_alarm"
+                style="@style/switch_style"
+                android:text="@string/is_alarm_enable"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/switch_vibrator"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 

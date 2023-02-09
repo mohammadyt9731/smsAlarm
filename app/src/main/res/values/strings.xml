@@ -28,4 +28,5 @@
     <string name="yes">بله</string>
     <string name="no">خیر</string>
     <string name="ok_i_found">باشه فهمیدم</string>
+    <string name="is_alarm_enable">فعال بودن هشدار پیامک</string>
 </resources>

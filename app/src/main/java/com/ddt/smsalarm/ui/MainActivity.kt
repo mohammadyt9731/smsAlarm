@@ -109,6 +109,7 @@ class MainActivity : AppCompatActivity() {
                     tvAlarmDuration.text = it.alarmDurationPerMinute.toString()
                     switchMaxVolume.isChecked = it.isMaxVolumeEnable
                     switchVibrator.isChecked = it.isVibratorEnable
+                    switchAlarm.isChecked = it.isAlarmEnable
                 }
             }
         }
@@ -148,6 +149,11 @@ class MainActivity : AppCompatActivity() {
 
             switchMaxVolume.setOnClickListener {
                 setting = setting.copy(isMaxVolumeEnable = setting.isMaxVolumeEnable.not())
+                viewModel.saveSetting(setting)
+            }
+
+            switchAlarm.setOnClickListener {
+                setting = setting.copy(isAlarmEnable = setting.isAlarmEnable.not())
                 viewModel.saveSetting(setting)
             }
 
